@@ -31,7 +31,7 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm text-gray-500">Active Bookings</p>
-                            <p class="text-2xl font-semibold text-gray-800">{{ $activeBookings ?? 0 }}</p>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $activeBookings ? $activeBookings->count() : 0 }}</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm text-gray-500">Unread Notifications</p>
-                            <p class="text-2xl font-semibold text-gray-800">{{ $unreadNotifications ?? 0 }}</p>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $unreadNotifications ? $unreadNotifications->count() : 0 }}</p>
                         </div>
                     </div>
                 </div>
@@ -85,13 +85,13 @@
                         <h3 class="text-lg font-semibold text-gray-800">Active Bookings</h3>
                     </div>
                     <div class="p-6">
-                        @if(isset($activeBookingsList) && $activeBookingsList->count() > 0)
+                        @if(isset($activeBookings) && $activeBookings->count() > 0)
                             <div class="space-y-4">
-                                @foreach($activeBookingsList as $booking)
+                                @foreach($activeBookings as $booking)
                                     <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
                                         <div class="flex justify-between items-start">
                                             <div>
-                                                <p class="text-sm text-gray-500">Booking #{{ $booking->code ?? $booking->id }}</p>
+                                                <p class="text-sm text-gray-500">Booking #{{ $booking->booking_code }}</p>
                                                 <p class="font-semibold text-gray-800">{{ ucfirst(str_replace('_', ' ', $booking->service_type ?? 'N/A')) }}</p>
                                                 <p class="text-sm text-gray-600 mt-1">
                                                     Pickup: {{ $booking->pickup_date ? \Carbon\Carbon::parse($booking->pickup_date)->format('M d, Y h:i A') : 'N/A' }}
@@ -197,9 +197,9 @@
                         <h3 class="text-lg font-semibold text-gray-800">Unread Notifications</h3>
                     </div>
                     <div class="p-6">
-                        @if(isset($notifications) && $notifications->count() > 0)
+                        @if(isset($unreadNotifications) && $unreadNotifications->count() > 0)
                             <div class="space-y-3">
-                                @foreach($notifications as $notification)
+                                @foreach($unreadNotifications as $notification)
                                     <div class="flex items-start p-3 bg-indigo-50 rounded-lg">
                                         <div class="flex-shrink-0 mt-1">
                                             <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +208,7 @@
                                         </div>
                                         <div class="ml-3 flex-1">
                                             <p class="text-sm font-medium text-gray-800">{{ $notification->type ?? 'Notification' }}</p>
-                                            <p class="text-sm text-gray-600">{{ $notification->message ?? $notification->data['message'] ?? '' }}</p>
+                                            <p class="text-sm text-gray-600">{{ $notification->message ?? '' }}</p>
                                             <p class="text-xs text-gray-400 mt-1">{{ $notification->created_at ? \Carbon\Carbon::parse($notification->created_at)->diffForHumans() : '' }}</p>
                                         </div>
                                     </div>
