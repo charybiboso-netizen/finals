@@ -129,10 +129,35 @@ class BookingController extends Controller
             ->with('success', 'Booking cancelled successfully.');
     }
 
+    public function receive(Booking $booking)
+    {
+        if ($booking->customer_id !== Auth::id()) {
+            abort(403);
+        }
+
+        if ($booking->status !== 'delivered') {
+            return back()->with('error', 'Only delivered bookings can be marked as received.');
+        }
+
+        $booking->updateStatus('received');
+
+        Notification::create([
+            'user_id' => Auth::id(),
+            'type' => 'booking_received',
+            'message' => "You have confirmed receipt of booking {$booking->booking_code}.",
+            'channel' => 'email',
+        ]);
+
+        ActivityLog::log(Auth::id(), 'booking_received', "Confirmed receipt of booking {$booking->booking_code}");
+
+        return redirect()->route('customer.bookings.show', $booking)
+            ->with('success', 'Booking marked as received. Thank you!');
+    }
+
     public function history()
     {
         $bookings = Booking::where('customer_id', Auth::id())
-            ->whereIn('status', ['completed', 'delivered', 'cancelled'])
+            ->whereIn('status', ['completed', 'delivered', 'received', 'cancelled'])
             ->with('services')
             ->latest()
             ->paginate(10);

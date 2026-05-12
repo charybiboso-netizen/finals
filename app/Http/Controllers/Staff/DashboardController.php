@@ -26,7 +26,7 @@ class DashboardController extends Controller
             ->count();
 
         $completedToday = Booking::where('staff_id', $staffId)
-            ->where('status', 'delivered')
+            ->whereIn('status', ['delivered', 'received'])
             ->whereDate('delivered_at', today())
             ->count();
 

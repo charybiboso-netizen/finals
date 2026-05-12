@@ -37,6 +37,7 @@
                                             'cleaning' => 'bg-purple-100 text-purple-800',
                                             'completed' => 'bg-green-100 text-green-800',
                                             'delivered' => 'bg-gray-100 text-gray-800',
+                                            'received' => 'bg-teal-100 text-teal-800',
                                             'cancelled' => 'bg-red-100 text-red-800',
                                         ];
                                     @endphp
@@ -166,7 +167,7 @@
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Status Timeline</h3>
                         @php
-                            $allStatuses = ['pending', 'confirmed', 'picked_up', 'cleaning', 'completed', 'delivered'];
+                            $allStatuses = ['pending', 'confirmed', 'picked_up', 'cleaning', 'completed', 'delivered', 'received'];
                             $currentIndex = array_search($booking->status, $allStatuses);
                             $timestamps = [
                                 'pending' => $booking->created_at,
@@ -175,6 +176,7 @@
                                 'cleaning' => $booking->cleaning_started_at,
                                 'completed' => $booking->completed_at,
                                 'delivered' => $booking->delivered_at,
+                                'received' => $booking->received_at,
                             ];
                         @endphp
                         <div class="space-y-4">
@@ -223,7 +225,7 @@
                     </div>
                 </div>
 
-                @if(!in_array($booking->status, ['delivered', 'cancelled']))
+                @if(!in_array($booking->status, ['delivered', 'received', 'cancelled']))
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Update Status</h3>

@@ -21,11 +21,11 @@ class DashboardController extends Controller
         $totalBookings = Booking::count();
         $pendingBookings = Booking::pending()->count();
         $activeBookings = Booking::whereIn('status', ['confirmed', 'picked_up', 'cleaning'])->count();
-        $completedBookings = Booking::where('status', 'delivered')->count();
+        $completedBookings = Booking::whereIn('status', ['delivered', 'received'])->count();
         $cancelledBookings = Booking::where('status', 'cancelled')->count();
 
-        $totalRevenue = Booking::where('status', 'delivered')->sum('total_price');
-        $todayRevenue = Booking::where('status', 'delivered')
+        $totalRevenue = Booking::whereIn('status', ['delivered', 'received'])->sum('total_price');
+        $todayRevenue = Booking::whereIn('status', ['delivered', 'received'])
             ->whereDate('delivered_at', today())
             ->sum('total_price');
 
@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $paidBookings = Booking::where('is_paid', true)->count();
         $unpaidBookings = Booking::where('is_paid', false)->count();
 
-        $revenueData = Booking::where('status', 'delivered')
+        $revenueData = Booking::whereIn('status', ['delivered', 'received'])
             ->select(DB::raw('DATE(delivered_at) as date'), DB::raw('SUM(total_price) as revenue'))
             ->whereMonth('delivered_at', now()->month)
             ->groupBy('date')
@@ -60,7 +60,7 @@ class DashboardController extends Controller
             ->groupBy('status')
             ->get();
 
-        $monthlyRevenue = Booking::where('status', 'delivered')
+        $monthlyRevenue = Booking::whereIn('status', ['delivered', 'received'])
             ->select(DB::raw('MONTH(delivered_at) as month'), DB::raw('SUM(total_price) as revenue'))
             ->whereYear('delivered_at', now()->year)
             ->groupBy('month')

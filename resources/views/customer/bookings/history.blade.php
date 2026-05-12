@@ -40,6 +40,7 @@
                                             $colors = [
                                                 'completed' => 'bg-green-100 text-green-800',
                                                 'delivered' => 'bg-gray-100 text-gray-800',
+                                                'received' => 'bg-teal-100 text-teal-800',
                                                 'cancelled' => 'bg-red-100 text-red-800',
                                             ];
                                             $badgeColor = $colors[$booking->status] ?? 'bg-gray-100 text-gray-800';
@@ -54,7 +55,7 @@
                                     <td class="px-4 py-3 text-sm">{{ $booking->delivery_date ? $booking->delivery_date->format('M d, Y') : 'N/A' }}</td>
                                     <td class="px-4 py-3 text-sm">
                                         <a href="{{ route('customer.bookings.show', $booking) }}" class="text-blue-600 hover:text-blue-900 font-medium">View</a>
-                                        @if(in_array($booking->status, ['completed', 'delivered']) && !$booking->rating)
+                                        @if(in_array($booking->status, ['completed', 'delivered', 'received']) && !$booking->rating)
                                             <a href="{{ route('customer.ratings.create', $booking) }}" class="ml-2 text-yellow-600 hover:text-yellow-900 font-medium">Rate</a>
                                         @endif
                                     </td>

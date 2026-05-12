@@ -35,7 +35,7 @@ class BookingController extends Controller
     public function update(Request $request, Booking $booking)
     {
         $request->validate([
-            'status' => ['required', 'in:pending,confirmed,picked_up,cleaning,completed,delivered,cancelled'],
+            'status' => ['required', 'in:pending,confirmed,picked_up,cleaning,completed,delivered,received,cancelled'],
             'staff_id' => ['nullable', 'exists:users,id'],
             'total_price' => ['nullable', 'numeric', 'min:0'],
             'payment_method' => ['nullable', 'string', 'max:50'],
@@ -50,6 +50,7 @@ class BookingController extends Controller
                 'cleaning' => 'cleaning_started_at',
                 'completed' => 'completed_at',
                 'delivered' => 'delivered_at',
+                'received' => 'received_at',
                 'cancelled' => 'cancelled_at',
             ];
             if (isset($timestamps[$request->status])) {

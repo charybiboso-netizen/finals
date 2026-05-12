@@ -71,6 +71,7 @@
                                                 'cleaning' => 'bg-purple-100 text-purple-800',
                                                 'completed' => 'bg-green-100 text-green-800',
                                                 'delivered' => 'bg-gray-100 text-gray-800',
+                                                'received' => 'bg-teal-100 text-teal-800',
                                                 'cancelled' => 'bg-red-100 text-red-800',
                                             ];
                                             $color = $statusColors[$booking->status] ?? 'bg-gray-100 text-gray-800';
@@ -114,6 +115,7 @@
                                         'cleaning' => 'bg-purple-100 text-purple-800',
                                         'completed' => 'bg-green-100 text-green-800',
                                         'delivered' => 'bg-gray-100 text-gray-800',
+                                        'received' => 'bg-teal-100 text-teal-800',
                                         'cancelled' => 'bg-red-100 text-red-800',
                                     ];
                                     $color = $statusColors[$pickup->status] ?? 'bg-gray-100 text-gray-800';
@@ -150,6 +152,7 @@
                                         'cleaning' => 'bg-purple-100 text-purple-800',
                                         'completed' => 'bg-green-100 text-green-800',
                                         'delivered' => 'bg-gray-100 text-gray-800',
+                                        'received' => 'bg-teal-100 text-teal-800',
                                         'cancelled' => 'bg-red-100 text-red-800',
                                     ];
                                     $color = $statusColors[$delivery->status] ?? 'bg-gray-100 text-gray-800';

@@ -11,7 +11,7 @@ class Booking extends Model
         'total_weight', 'total_price', 'notes', 'pickup_address', 'delivery_address',
         'pickup_date', 'delivery_date', 'pickup_scheduled_at', 'delivery_scheduled_at',
         'picked_up_at', 'cleaning_started_at', 'completed_at', 'delivered_at',
-        'cancelled_at', 'cancellation_reason', 'is_paid', 'payment_method', 'paid_at',
+        'received_at', 'cancelled_at', 'cancellation_reason', 'is_paid', 'payment_method', 'paid_at',
     ];
 
     protected function casts(): array
@@ -25,6 +25,7 @@ class Booking extends Model
             'cleaning_started_at' => 'datetime',
             'completed_at' => 'datetime',
             'delivered_at' => 'datetime',
+            'received_at' => 'datetime',
             'cancelled_at' => 'datetime',
             'paid_at' => 'datetime',
             'is_paid' => 'boolean',
@@ -87,6 +88,7 @@ class Booking extends Model
             'cleaning' => 'cleaning_started_at',
             'completed' => 'completed_at',
             'delivered' => 'delivered_at',
+            'received' => 'received_at',
             'cancelled' => 'cancelled_at',
         ];
 
