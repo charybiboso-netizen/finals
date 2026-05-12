@@ -20,11 +20,11 @@ class DashboardController extends Controller
             ->get();
 
         $completedBookings = Booking::where('customer_id', $userId)
-            ->whereIn('status', ['completed', 'delivered'])
+            ->whereIn('status', ['completed', 'delivered', 'received'])
             ->count();
 
         $totalSpent = Booking::where('customer_id', $userId)
-            ->where('status', 'delivered')
+            ->whereIn('status', ['delivered', 'received'])
             ->sum('total_price');
 
         $recentBookings = Booking::where('customer_id', $userId)

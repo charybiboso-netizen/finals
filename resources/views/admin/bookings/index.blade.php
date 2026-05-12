@@ -31,7 +31,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $booking->customer->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @php
-                                    $colors = ['pending'=>'yellow','confirmed'=>'blue','picked_up'=>'indigo','cleaning'=>'purple','completed'=>'green','delivered'=>'green','cancelled'=>'red'];
+                                    $colors = ['pending'=>'yellow','confirmed'=>'blue','picked_up'=>'indigo','cleaning'=>'purple','completed'=>'green','delivered'=>'green','received'=>'teal','cancelled'=>'red'];
                                     $c = $colors[$booking->status] ?? 'gray';
                                 @endphp
                                 <span class="px-2 py-1 text-xs font-semibold rounded-full bg-{{ $c }}-100 text-{{ $c }}-800">{{ ucfirst(str_replace('_', ' ', $booking->status)) }}</span>

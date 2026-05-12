@@ -22,6 +22,7 @@
                             <option value="cleaning" {{ old('status', $booking->status) == 'cleaning' ? 'selected' : '' }}>Cleaning</option>
                             <option value="completed" {{ old('status', $booking->status) == 'completed' ? 'selected' : '' }}>Completed</option>
                             <option value="delivered" {{ old('status', $booking->status) == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                            <option value="received" {{ old('status', $booking->status) == 'received' ? 'selected' : '' }}>Received</option>
                             <option value="cancelled" {{ old('status', $booking->status) == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         </select>
                         @error('status') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror

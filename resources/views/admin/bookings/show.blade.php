@@ -39,7 +39,7 @@
                             <span class="text-sm font-medium text-gray-500">Status</span>
                             <p class="mt-1">
                                 @php
-                                    $statusColors = ['pending'=>'yellow','confirmed'=>'blue','picked_up'=>'indigo','cleaning'=>'purple','completed'=>'green','delivered'=>'green','cancelled'=>'red'];
+                                    $statusColors = ['pending'=>'yellow','confirmed'=>'blue','picked_up'=>'indigo','cleaning'=>'purple','completed'=>'green','delivered'=>'green','received'=>'teal','cancelled'=>'red'];
                                     $sc = $statusColors[$booking->status] ?? 'gray';
                                 @endphp
                                 <span class="px-2 py-1 text-xs font-semibold rounded-full bg-{{ $sc }}-100 text-{{ $sc }}-800">{{ ucfirst(str_replace('_', ' ', $booking->status)) }}</span>
@@ -147,6 +147,7 @@
                                 if ($booking->created_at) $timelineEvents[] = ['label' => 'Booking Created', 'date' => $booking->created_at, 'icon' => 'plus'];
                                 if ($booking->picked_up_at) $timelineEvents[] = ['label' => 'Picked Up', 'date' => $booking->picked_up_at, 'icon' => 'truck'];
                                 if ($booking->delivered_at) $timelineEvents[] = ['label' => 'Delivered', 'date' => $booking->delivered_at, 'icon' => 'check'];
+                                if ($booking->received_at) $timelineEvents[] = ['label' => 'Received by Customer', 'date' => $booking->received_at, 'icon' => 'check'];
                                 if ($booking->completed_at) $timelineEvents[] = ['label' => 'Completed', 'date' => $booking->completed_at, 'icon' => 'check'];
                                 if ($booking->cancelled_at) $timelineEvents[] = ['label' => 'Cancelled', 'date' => $booking->cancelled_at, 'icon' => 'x'];
                                                                 $statusTimestamps = [];

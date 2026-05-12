@@ -17,7 +17,7 @@
                 </div>
 
                 @php
-                    $allStatuses = ['pending', 'confirmed', 'picked_up', 'cleaning', 'completed', 'delivered'];
+                    $allStatuses = ['pending', 'confirmed', 'picked_up', 'cleaning', 'completed', 'delivered', 'received'];
                     $currentIndex = array_search($booking->status, $allStatuses);
                     $timestamps = [
                         'pending' => $booking->created_at,
@@ -26,6 +26,7 @@
                         'cleaning' => $booking->cleaning_started_at,
                         'completed' => $booking->completed_at,
                         'delivered' => $booking->delivered_at,
+                        'received' => $booking->received_at,
                     ];
                     $labels = [
                         'pending' => 'Pending',
@@ -34,6 +35,7 @@
                         'cleaning' => 'Cleaning',
                         'completed' => 'Completed',
                         'delivered' => 'Delivered',
+                        'received' => 'Received',
                     ];
                     $icons = [
                         'pending' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -42,6 +44,7 @@
                         'cleaning' => 'M5 13l4 4L19 7',
                         'completed' => 'M5 13l4 4L19 7',
                         'delivered' => 'M5 13l4 4L19 7',
+                        'received' => 'M5 13l4 4L19 7',
                     ];
                 @endphp
 

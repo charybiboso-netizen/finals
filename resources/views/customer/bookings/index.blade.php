@@ -45,6 +45,7 @@
                                                 'cleaning' => 'bg-purple-100 text-purple-800',
                                                 'completed' => 'bg-green-100 text-green-800',
                                                 'delivered' => 'bg-gray-100 text-gray-800',
+                                                'received' => 'bg-teal-100 text-teal-800',
                                                 'cancelled' => 'bg-red-100 text-red-800',
                                             ];
                                             $badgeColor = $colors[$booking->status] ?? 'bg-gray-100 text-gray-800';
@@ -68,6 +69,12 @@
                                         <a href="{{ route('customer.bookings.show', $booking) }}" class="text-blue-600 hover:text-blue-900 font-medium">View</a>
                                         @if(in_array($booking->status, ['pending', 'confirmed', 'picked_up', 'cleaning', 'completed']))
                                             <a href="{{ route('customer.bookings.track', $booking) }}" class="text-indigo-600 hover:text-indigo-900 font-medium">Track</a>
+                                        @endif
+                                        @if($booking->status === 'delivered')
+                                            <form action="{{ route('customer.bookings.receive', $booking) }}" method="POST" class="inline" onsubmit="return confirm('Confirm receipt?')">
+                                                @csrf
+                                                <button type="submit" class="text-teal-600 hover:text-teal-900 font-medium bg-transparent border-0 p-0 cursor-pointer">Receive</button>
+                                            </form>
                                         @endif
                                         @if($booking->canBeCancelled())
                                             <a href="{{ route('customer.bookings.show', $booking) }}#cancel" class="text-red-600 hover:text-red-900 font-medium">Cancel</a>

@@ -86,6 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/bookings', [CustomerBookingController::class, 'index'])->name('bookings.index');
         Route::get('/bookings/{booking}', [CustomerBookingController::class, 'show'])->name('bookings.show');
         Route::post('/bookings/{booking}/cancel', [CustomerBookingController::class, 'cancel'])->name('bookings.cancel');
+        Route::post('/bookings/{booking}/receive', [CustomerBookingController::class, 'receive'])->name('bookings.receive');
         Route::get('/bookings/{booking}/track', [CustomerBookingController::class, 'track'])->name('bookings.track');
         Route::get('/booking-history', [CustomerBookingController::class, 'history'])->name('bookings.history');
 

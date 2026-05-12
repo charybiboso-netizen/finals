@@ -35,6 +35,7 @@
                                     'cleaning' => 'bg-purple-100 text-purple-800',
                                     'completed' => 'bg-green-100 text-green-800',
                                     'delivered' => 'bg-gray-100 text-gray-800',
+                                    'received' => 'bg-teal-100 text-teal-800',
                                     'cancelled' => 'bg-red-100 text-red-800',
                                 ];
                             @endphp
@@ -140,7 +141,14 @@
                 <a href="{{ route('customer.bookings.track', $booking) }}" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 font-medium">Track</a>
             @endif
 
-            @if(in_array($booking->status, ['completed', 'delivered']) && !$booking->rating)
+            @if($booking->status === 'delivered')
+                <form action="{{ route('customer.bookings.receive', $booking) }}" method="POST" class="inline" onsubmit="return confirm('Confirm that you have received your laundry?')">
+                    @csrf
+                    <button type="submit" class="bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 font-medium">Mark as Received</button>
+                </form>
+            @endif
+
+            @if(in_array($booking->status, ['completed', 'delivered', 'received']) && !$booking->rating)
                 <a href="{{ route('customer.ratings.create', $booking) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 font-medium">Rate This Booking</a>
             @endif
 
