@@ -29,10 +29,7 @@
                             @auth
                                 <a href="{{ url('/dashboard') }}" class="px-5 py-2 bg-white text-indigo-700 font-semibold rounded-lg hover:bg-indigo-50 transition">Dashboard</a>
                             @else
-                                <a href="{{ route('login') }}" class="text-white hover:text-indigo-100 transition">Log in</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="px-5 py-2 bg-white text-indigo-700 font-semibold rounded-lg hover:bg-indigo-50 transition">Register</a>
-                                @endif
+
                             @endauth
                         </div>
                     @endif
@@ -101,18 +98,7 @@
                 </div>
             </div>
 
-            @guest
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 lg:p-12 shadow-lg text-center">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Simplify Your Laundry?</h2>
-                    <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto">Join CleanSwift today and experience hassle-free laundry service from the comfort of your home.</p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a href="{{ route('register') }}" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">Create Your Account</a>
-                        <a href="{{ route('login') }}" class="px-6 py-3 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition">Sign In</a>
-                    </div>
-                </div>
-            </div>
-            @endguest
+
 
             <footer class="border-t border-white/20">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
